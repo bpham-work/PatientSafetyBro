@@ -1,0 +1,8 @@
+"D:/Titan-workspace/PatientSafetyBro/build/android/gen/android/support/v7/appcompat/R.java"
+"D:/Titan-workspace/PatientSafetyBro/build/android/gen/com/parivedasolutions/patientsafety/ApplicationStylesheet.java"
+"D:/Titan-workspace/PatientSafetyBro/build/android/gen/com/parivedasolutions/patientsafety/AssetCryptImpl.java"
+"D:/Titan-workspace/PatientSafetyBro/build/android/gen/com/parivedasolutions/patientsafety/PatientsafetyActivity.java"
+"D:/Titan-workspace/PatientSafetyBro/build/android/gen/com/parivedasolutions/patientsafety/PatientsafetyAppInfo.java"
+"D:/Titan-workspace/PatientSafetyBro/build/android/gen/com/parivedasolutions/patientsafety/PatientsafetyApplication.java"
+"D:/Titan-workspace/PatientSafetyBro/build/android/gen/com/parivedasolutions/patientsafety/R.java"
+"D:/Titan-workspace/PatientSafetyBro/build/android/gen/ti/modules/titanium/ui/R.java"
