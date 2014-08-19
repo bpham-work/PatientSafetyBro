@@ -28,11 +28,11 @@ var uncheckedTemplate = {
         {                            
             type: 'Ti.UI.Label',     
             bindId: 'title',         
-                       
+                properties: {       
                 color: 'black',
                 font: { fontFamily:'Arial', fontSize: '20dp', fontWeight:'bold' },
                 left: '60dp', top: 0,
-            
+            }
         },
     ],
     // Binds a callback to the click event, which catches events bubbled by the view subcomponents.
