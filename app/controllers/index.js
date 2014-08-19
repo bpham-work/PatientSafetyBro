@@ -2,9 +2,11 @@ var tasksArray = ['foo', 'bar', 'baz', 'qux'];
 positionCounter = 0;
 $.label.text = tasksArray[positionCounter];
 
-function doClick(e)
+function completeTask(e)
 {
+	// Flag as completed and set end time
     setTask(positionCounter++);
+    // Perhaps set start time of new task?
 }
 
 function setTask(newIndex)
@@ -22,7 +24,7 @@ function nextTask(e)
 	{
 		positionCounter++;
 	}
-	else
+	else if (e.direction == 'right')
 	{
 		positionCounter--;
 	}
