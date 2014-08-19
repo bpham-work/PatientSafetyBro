@@ -13,8 +13,16 @@
 	}
 }
 
-"#button": {
-	bottom:"50", 
-	width:"100",
+"#completeButton": {
+	bottom:"10",
+	left: "50",
+	width:"200",
+	height:"50"
+}
+
+"#newRunButton": {
+	bottom:"10",
+	right: "50",
+	width:"200",
 	height:"50"
 }

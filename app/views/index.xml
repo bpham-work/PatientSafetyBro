@@ -1,6 +1,8 @@
 <Alloy>
-	<Window class="container" onSwipe="nextTask">
-		<Label id="label"></Label>
-		<Button id="button" onClick="completeTask" title="Yes" />
+	<Window class="container">
+		<ListView id="taskList">
+		</ListView>
+		<Button id="completeButton" title="Complete" />
+		<Button id="newRunButton" title="New Run" />
 	</Window>
 </Alloy>
