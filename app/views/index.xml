@@ -1,6 +1,6 @@
 <Alloy>
 	<Window class="container" onSwipe="nextTask">
 		<Label id="label"></Label>
-		<Button id="button" onClick="doClick" title="Yes" />
+		<Button id="button" onClick="completeTask" title="Yes" />
 	</Window>
 </Alloy>
