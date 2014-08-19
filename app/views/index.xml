@@ -1,7 +1,5 @@
 <Alloy>
 	<Window class="container">
-		<ListView id="taskList">
-		</ListView>
 		<Button id="completeButton" title="Complete" />
 		<Button id="newRunButton" title="New Run" />
 	</Window>

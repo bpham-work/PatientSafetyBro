@@ -1,67 +1,54 @@
-var tasksArray = ['foo', 'bar', 'baz', 'qux'];
-var taskListView = $.taskList;
-
-var tasksDataSet = [
-    { properties: { title: 'Sedation protocol ordered?', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { properties: { title: 'Analgesia protocol ordered?', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { properties: { title: 'Neuromuscular blockade protocol ordered?', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { properties: { title: 'Delirium protocol ordered?', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { properties: { title: 'DVT prophylaxis - standard ICU orders?', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { properties: { title: 'Head of bed mechanically ventilated?', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { properties: { title: 'Head of bed >= 30 degrees?', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { properties: { title: 'Head of bed recorded on bedside chart?', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { properties: { title: 'Skin condition - Braden score recorded', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { properties: { title: 'Skin condition - Specialty bed ordered',  accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { properties: { title: 'Skin condition - Lesion present on transfer to ICU', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { properties: { title: 'Skin condition - Wound team consulted', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { properties: { title: 'Nutrition team assessment updated in record',  accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { properties: { title: 'Insulin protocol ordered?', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { properties: { title: 'If Severe Sepsis present, protocol ordered?', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { properties: { title: 'Mechanical ventilation?', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { properties: { title: 'Mechanical ventilation - Weaning protocol active?', accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}}
-];
-
-
-
 var uncheckedTemplate = {
     childTemplates: [
-        {                            
-            type: 'Ti.UI.Label',     
-            bindId: 'title',         
-                       
+        {                            // Title 
+            type: 'Ti.UI.Label',     // Use a label for the title 
+            bindId: 'task',          // Maps to a custom info property of the item data
+            properties: {            // Sets the label properties
                 color: 'black',
                 font: { fontFamily:'Arial', fontSize: '20dp', fontWeight:'bold' },
-                left: '60dp', top: 0,
-            
-        },
-    ],
-    // Binds a callback to the click event, which catches events bubbled by the view subcomponents.
-   events: {click: toggleCheck}
+                left: '10dp', 
+                top: 0,
+                accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE
+            }
+        }
+    ]
 };
 
 var checkedTemplate = JSON.parse(JSON.stringify(uncheckedTemplate));
 // Change the text color to red
 checkedTemplate.childTemplates[0].properties.color = 'red';
-checkedTemplate.events.click = toggleCheck;
+checkedTemplate.childTemplates[0].properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_CHECKMARK;
+
+var listView = Ti.UI.createListView({
+    templates: { 'unchecked': uncheckedTemplate, 'checked': checkedTemplate },
+    defaultItemTemplate: 'unchecked'
+});
+
+var sections = [];
 
 var taskSection = Ti.UI.createListSection();
-taskSection.setItems(tasksDataSet);
-taskListView.sections = [taskSection];
-taskListView.templates = {'uncheck': uncheckedTemplate, 'check': checkedTemplate };
-taskListView.defaultItemTemplate = 'uncheck';
+var taskDataSet = [
+    { task: {text: 'Sedation protocol ordered?'}},
+    { task: {text: 'Analgesia protocol ordered?'}},
+    { task: {text: 'Neuromuscular blockade protocol ordered?'}},
+    { task: {text: 'Delirium protocol ordered?'}},
+    { task: {text: 'DVT prophylaxis - standard ICU orders?'}},
+    { task: {text: 'Head of bed mechanically ventilated?'}},
+    { task: {text: 'Head of bed >= 30 degrees?'}},
+    { task: {text: 'Head of bed recorded on bedside chart?'}},
+    { task: {text: 'Skin condition - Braden score recorded'}},
+    { task: {text: 'Skin condition - Specialty bed ordered'}},
+    { task: {text: 'Skin condition - Lesion present on transfer to ICU'}},
+    { task: {text: 'Skin condition - Wound team consulted'}},
+    { task: {text: 'Nutrition team assessment updated in record'}},
+    { task: {text: 'Insulin protocol ordered?'}},
+    { task: {text: 'If Severe Sepsis present, protocol ordered?'}},
+    { task: {text: 'Mechanical ventilation?'}},
+    { task: {text: 'Mechanical ventilation - Weaning protocol active?'}}
+];
+taskSection.setItems(taskDataSet);
+sections.push(taskSection);
 
-function toggleCheck(e) {
-    var item = taskSection.getItemAt(e.itemIndex);
-    if (item.properties.accessoryType == Ti.UI.LIST_ACCESSORY_TYPE_NONE) {
-        item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_CHECKMARK;
-        item.template = 'check';
-    }
-    else {
-        item.properties.accessoryType = Ti.UI.LIST_ACCESSORY_TYPE_NONE;
-        item.template = 'uncheck';
-    }
-    taskSection.updateItemAt(e.itemIndex, item);
-} 
-
-
+listView.setSections(sections);
+$.index.add(listView);
 $.index.open();
