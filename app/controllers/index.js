@@ -1,28 +1,4 @@
-var uncheckedTemplate = {
-    childTemplates: [
-        {                            // Title 
-            type: 'Ti.UI.Label',     // Use a label for the title 
-            bindId: 'task',          // Maps to a custom info property of the item data
-            properties: {            // Sets the label properties
-                color: 'black',
-                font: { fontFamily:'Arial', fontSize: '20dp', fontWeight:'bold' },
-                left: '10dp', 
-                top: 0,
-            }
-        }
-    ],
-    events: {click: toggleCheck}
-};
-
-var checkedTemplate = JSON.parse(JSON.stringify(uncheckedTemplate));
-// Change the text color to red
-checkedTemplate.childTemplates[0].properties.color = 'red';
-checkedTemplate.events.click = toggleCheck;
-
-var listView = Ti.UI.createListView({
-    templates: { 'unchecked': uncheckedTemplate, 'checked': checkedTemplate },
-    defaultItemTemplate: 'unchecked'
-});
+var listView = $.list;
 
 var sections = [];
 
@@ -48,7 +24,7 @@ var taskDataSet = [
 ];
 taskSection.setItems(taskDataSet);
 sections.push(taskSection);
-listView.setSections(sections);
+listView.sections[0].items = taskDataSet;
 
 function toggleCheck (e) {
     var item = taskSection.getItemAt(e.itemIndex);
@@ -63,6 +39,4 @@ function toggleCheck (e) {
     taskSection.updateItemAt(e.itemIndex, item);
 } 
 
-
-$.index.add(listView);
 $.index.open();
