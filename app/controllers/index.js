@@ -3,28 +3,36 @@ var listView = $.list;
 var sections = [];
 
 var taskSection = Ti.UI.createListSection();
-var taskDataSet = [
-    { task: {text: 'Sedation protocol ordered?'}, properties: {accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { task: {text: 'Analgesia protocol ordered?'}, properties: {accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { task: {text: 'Neuromuscular blockade protocol ordered?'}, properties: {accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { task: {text: 'Delirium protocol ordered?'}, properties: {accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { task: {text: 'DVT prophylaxis - standard ICU orders?'}, properties: {accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { task: {text: 'Head of bed mechanically ventilated?'}, properties: {accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { task: {text: 'Head of bed >= 30 degrees?'}, properties: {accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { task: {text: 'Head of bed recorded on bedside chart?'}, properties: {accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { task: {text: 'Skin condition - Braden score recorded'}, properties: {accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { task: {text: 'Skin condition - Specialty bed ordered'}, properties: {accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { task: {text: 'Skin condition - Lesion present on transfer to ICU'}, properties: {accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { task: {text: 'Skin condition - Wound team consulted'}, properties: {accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { task: {text: 'Nutrition team assessment updated in record'}, properties: {accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { task: {text: 'Insulin protocol ordered?'}, properties: {accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { task: {text: 'If Severe Sepsis present, protocol ordered?'}, properties: {accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { task: {text: 'Mechanical ventilation?'}, properties: {accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}},
-    { task: {text: 'Mechanical ventilation - Weaning protocol active?'}, properties: {accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}}
-];
-taskSection.setItems(taskDataSet);
-sections.push(taskSection);
-listView.sections[0].items = taskDataSet;
+
+// Pull task data from Google Sheets Script End-point
+var ajax = Ti.Network.createHTTPClient();
+ajax.onerror = function(e){
+    alert('Error');
+    Titanium.API.error(e);
+};
+var taskDataSet = [];
+ajax.onload = function(){
+    Titanium.API.info(this.responseText);
+    var data = this.responseText;
+    var jdata = JSON.parse(data).data;
+    
+    // Generate the required list objects for taskDataSet
+    for (var row in jdata)
+    {
+    	taskDataSet.push( {task: {taskId: jdata[row]['Id'], text: jdata[row]['Step']}, properties: {accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}} );
+    }
+    
+    // Attach task data to our list view section
+	taskSection.setItems(taskDataSet);
+	sections.push(taskSection);
+	listView.sections[0].items = taskDataSet;
+	
+	$.index.open();
+};
+ajax.open('POST', 'https://script.google.com/macros/s/AKfycbzAonjX6IGGcefEIqkC5kfG1bJ_M-RXNS6RVa80wRNM8brHNs11/exec');
+ajax.send({
+    "key": "991087F6-2883-11E4-896E-1D75D34483DE"
+});
 
 function toggleCheck (e) {
     var item = taskSection.getItemAt(e.itemIndex);
@@ -38,5 +46,3 @@ function toggleCheck (e) {
     }
     taskSection.updateItemAt(e.itemIndex, item);
 } 
-
-$.index.open();
