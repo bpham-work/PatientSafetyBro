@@ -4,7 +4,8 @@
 Calls to Google Sheets are all done in a similar manner.
 
 ```
-ENDPOINT_NAME--ENDPOINT_URL
+ENDPOINT_NAME
+--ENDPOINT_URL
 IN:  input_variable1 (variable_type)
      input_variable2 (variable_type)
         sub_input_variable (variable_type)
@@ -13,7 +14,8 @@ OUT: output_variable1 (variable_type)
 ```
 
 ```
-insert_issue--https://script.google.com/macros/s/AKfycbytObLrGjCjqHXltuSGz9AxzVOMj8XiutDQO1vrrtaZQOyUfULm/exec
+insert_issue
+--https://script.google.com/macros/s/AKfycbytObLrGjCjqHXltuSGz9AxzVOMj8XiutDQO1vrrtaZQOyUfULm/exec
 IN:  key (string)
      insert (object)
         Run Id (string)
@@ -25,7 +27,8 @@ OUT: result (string--enumerated: "success", "error")
 ```
 
 ```
-insert_run--https://script.google.com/macros/s/AKfycbwWY_aZRmmdkzuWkBsbjaY331aiCLvwqS4dgz77r6lR1sDoIVE/exec
+insert_run
+--https://script.google.com/macros/s/AKfycbwWY_aZRmmdkzuWkBsbjaY331aiCLvwqS4dgz77r6lR1sDoIVE/exec
 IN:  key (string)
      insert (object)
         Id (string)
@@ -39,7 +42,8 @@ OUT: result (string--enumerated: "success", "error")
 ```
 
 ```
-select_steps--https://script.google.com/macros/s/AKfycbzAonjX6IGGcefEIqkC5kfG1bJ_M-RXNS6RVa80wRNM8brHNs11/exec
+select_steps
+--https://script.google.com/macros/s/AKfycbzAonjX6IGGcefEIqkC5kfG1bJ_M-RXNS6RVa80wRNM8brHNs11/exec
 IN:  key (string)
 OUT: result (string--enumerated: "success", "error")
      data (JSON-array--optional)
