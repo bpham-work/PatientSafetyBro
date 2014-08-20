@@ -1,18 +1,25 @@
-Welcome to your Appcelerator Titanium Mobile Project
+## Patient Safety Tablet/Phone App
 
-This is a blank project.  Start by editing your application's app.js to 
-make your first mobile project using Titanium.
+How to make a call to the "select_steps" Google App Script's endpoint from Titanium:
+```javascript
+// Pull task data from Google Sheets Script End-point
+var ajax = Ti.Network.createHTTPClient();
+ajax.onerror = function(e){
+    alert('Error');
+};
+var taskDataSet = [];
+ajax.onload = function(){
+    Titanium.API.info(this.responseText);
+    var data = this.responseText;
+    var jdata = JSON.parse(data).data;
+    
+    // YOUR CODE HERE
+};
 
-
-
-----------------------------------
-Stuff our legal folk make us say:
-
-Appcelerator, Appcelerator Titanium and associated marks and logos are 
-trademarks of Appcelerator, Inc. 
-
-Titanium is Copyright (c) 2008-2013 by Appcelerator, Inc. All Rights Reserved.
-
-Titanium is licensed under the Apache Public License (Version 2). Please
-see the LICENSE file for the full license.
-
+// A POST or a GET should work fine, the URL is important--it is the endpoint for "select_steps"
+ajax.open('POST', 'https://script.google.com/macros/s/AKfycbzAonjX6IGGcefEIqkC5kfG1bJ_M-RXNS6RVa80wRNM8brHNs11/exec');
+// Pass in any necessary parameters here
+ajax.send({
+    "key": "${SUPER_SECRET_KEY}"
+});
+```
