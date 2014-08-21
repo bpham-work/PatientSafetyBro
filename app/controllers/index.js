@@ -47,7 +47,7 @@ ajax.onload = function(){
 };
 ajax.open('POST', 'https://script.google.com/macros/s/AKfycbzAonjX6IGGcefEIqkC5kfG1bJ_M-RXNS6RVa80wRNM8brHNs11/exec');
 ajax.send({
-    "key": "991087F6-2883-11E4-896E-1D75D34483DE"
+    "key": "SECRET_KEY"
 });
 
 function checkRow(event) {
