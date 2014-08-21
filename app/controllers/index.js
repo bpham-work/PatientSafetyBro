@@ -17,6 +17,9 @@ ajax.onload = function(){
     var jdata = JSON.parse(data).data;
     
     // Generate the required list objects for taskDataSet
+    // TODO: We may want to cache this since it seems like it slows things down a bit
+    // If we do it could work without a network connection and just store runs and issues locally until
+    // a valid connection is established
     for (var row in jdata)
     {
     	taskDataSet.push( {task: {taskId: jdata[row]['Id'], text: jdata[row]['Step']}, properties: {accessoryType: Ti.UI.LIST_ACCESSORY_TYPE_NONE}} );
