@@ -1,11 +1,6 @@
 ".container": {
 	backgroundColor:"white"
 },
-"Label": {
-	width: Ti.UI.SIZE,
-	height: Ti.UI.SIZE,
-	color: "#000"
-} 
 
 "#completeButton": {
 	bottom:"10",
@@ -23,5 +18,10 @@
 
 ".taskLabel": {
 	color: 'black',
-	left: '75dp'
+	left: '75dp',
+	fontSize: '20dp'
+}
+
+".reportButton": {
+	left: '0dp'
 }
