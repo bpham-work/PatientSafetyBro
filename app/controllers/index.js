@@ -59,5 +59,3 @@ function reportTask(event) {
 }
 
 $.index.open();
-
-
