@@ -41,7 +41,7 @@ for(x = 0; x < taskDataSet.length; x++) {
 	
 	label.addEventListener('click', checkRow);
 	reportButton.addEventListener('click', reportTask);
-	
+
 	tableData.push(row);
 }
 
