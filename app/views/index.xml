@@ -1,17 +1,7 @@
 <Alloy>
 	<Window class="container">
-		<ListView id="list" defaultItemTemplate="unchecked">
-			<Templates>
-				<ItemTemplate name="unchecked" id="unchecked">
-				   	<View class="item-container">
-				   		<Button class="completeButton" title="!" />               
-						<Label bindId="task" class="taskLabel" />  
-					</View>
-				</ItemTemplate>
-			</Templates>
-			<ListSection>			
-			</ListSection>
-		</ListView>
+		<TableView id="tableView">
+		</TableView>
 		<Button id="completeButton" title="Complete" />
 		<Button id="newRunButton" title="New Run" />
 	</Window>
